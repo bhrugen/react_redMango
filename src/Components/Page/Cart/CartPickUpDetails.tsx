@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { inputHelper } from "../../../Helper";
 import { cartItemModel } from "../../../Interfaces";
 import { RootState } from "../../../Storage/Redux/store";
 
@@ -9,12 +10,22 @@ export default function CartPickUpDetails() {
   );
   let grandTotal = 0;
   let totalItems = 0;
-
+  const initialUserData = {
+    name: "",
+    email: "",
+    phoneNumber: "",
+  };
   shoppingCartFromStore?.map((cartItem: cartItemModel) => {
     totalItems += cartItem.quantity ?? 0;
     grandTotal += (cartItem.menuItem?.price ?? 0) * (cartItem.quantity ?? 0);
     return null;
   });
+
+  const [userInput, setUserInput] = useState(initialUserData);
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const tempData = inputHelper(e, userInput);
+    setUserInput(tempData);
+  };
 
   return (
     <div className="border pb-5 pt-3">
@@ -27,9 +38,11 @@ export default function CartPickUpDetails() {
           Pickup Name
           <input
             type="text"
+            value={userInput.name}
             className="form-control"
             placeholder="name..."
             name="name"
+            onChange={handleUserInput}
             required
           />
         </div>
@@ -37,9 +50,11 @@ export default function CartPickUpDetails() {
           Pickup Email
           <input
             type="email"
+            value={userInput.email}
             className="form-control"
             placeholder="email..."
             name="email"
+            onChange={handleUserInput}
             required
           />
         </div>
@@ -48,9 +63,11 @@ export default function CartPickUpDetails() {
           Pickup Phone Number
           <input
             type="number"
+            value={userInput.phoneNumber}
             className="form-control"
             placeholder="phone number..."
             name="phoneNumber"
+            onChange={handleUserInput}
             required
           />
         </div>
