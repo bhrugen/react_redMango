@@ -1,3 +1,4 @@
 import menuItemModel from "./menuItemModel";
-
-export type { menuItemModel };
+import cartItemModel from "./cartItemModel";
+import shoppingCartModel from "./shoppingCartModel";
+export type { menuItemModel, cartItemModel, shoppingCartModel };
