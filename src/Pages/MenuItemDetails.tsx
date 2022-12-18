@@ -4,7 +4,7 @@ import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
-import { MainLoader } from "../Components/Page/Common";
+import { MainLoader, MiniLoader } from "../Components/Page/Common";
 // USER ID  - b7ae37bf-09b1-4b47-9ce1-c963031d2920
 function MenuItemDetails() {
   const { menuItemId } = useParams();
@@ -85,12 +85,18 @@ function MenuItemDetails() {
             </span>
             <div className="row pt-4">
               <div className="col-5">
-                <button
-                  className="btn btn-success form-control"
-                  onClick={() => handleAddToCart(data.result?.id)}
-                >
-                  Add to Cart
-                </button>
+                {isAddingToCart ? (
+                  <button disabled className="btn btn-success form-control">
+                    <MiniLoader />
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success form-control"
+                    onClick={() => handleAddToCart(data.result?.id)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
 
               <div className="col-5 ">
