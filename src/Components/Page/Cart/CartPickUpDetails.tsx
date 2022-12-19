@@ -10,11 +10,12 @@ export default function CartPickUpDetails() {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
+  const userData = useSelector((state: RootState) => state.userAuthStore);
   let grandTotal = 0;
   let totalItems = 0;
   const initialUserData = {
-    name: "",
-    email: "",
+    name: userData.fullName,
+    email: userData.email,
     phoneNumber: "",
   };
   shoppingCartFromStore?.map((cartItem: cartItemModel) => {
