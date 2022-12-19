@@ -13,6 +13,7 @@ export default function CartPickUpDetails() {
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
   const userData = useSelector((state: RootState) => state.userAuthStore);
+
   let grandTotal = 0;
   let totalItems = 0;
   const initialUserData = {
@@ -38,10 +39,9 @@ export default function CartPickUpDetails() {
     setLoading(true);
 
     const { data }: apiResponse = await initiatePayment(userData.id);
-    const orderSummary = { grandTotal, totalItems };
-    console.log(data);
+
     navigate("/payment", {
-      state: { apiResult: data?.result, userData, orderSummary },
+      state: { apiResult: data?.result, userInput },
     });
   };
 

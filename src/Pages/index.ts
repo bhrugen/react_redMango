@@ -9,9 +9,9 @@ import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
 import AccessDenied from "./AccessDenied";
 import Payment from "./Payment";
 export {
-  Payment,
   Home,
   NotFound,
+  Payment,
   MenuItemDetails,
   ShoppingCart,
   Login,

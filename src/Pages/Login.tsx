@@ -32,14 +32,12 @@ function Login() {
       password: userInput.password,
     });
     if (response.data) {
-      console.log(response.data);
       const { token } = response.data.result;
       const { fullName, id, email, role }: userModel = jwt_decode(token);
       localStorage.setItem("token", token);
       dispatch(setLoggedInUser({ fullName, id, email, role }));
       navigate("/");
     } else if (response.error) {
-      console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
     }
 
