@@ -16,7 +16,6 @@ function Payment() {
     // passing the client secret obtained from the server
     clientSecret: apiResult.clientSecret,
   };
-  console.log(apiResult);
   return (
     <Elements stripe={stripePromise} options={options}>
       <div className="container m-5 p-5">
