@@ -26,6 +26,8 @@ function Login() {
     });
     if (response.data) {
       console.log(response.data);
+      const { token } = response.data.result;
+      localStorage.setItem("token", token);
     } else if (response.error) {
       console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
