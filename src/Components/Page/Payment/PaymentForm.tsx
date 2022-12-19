@@ -9,8 +9,10 @@ import { toastNotify } from "../../../Helper";
 import { apiResponse, cartItemModel } from "../../../Interfaces";
 import { SD_Status } from "../../../Utility/SD";
 import { orderSummaryProps } from "../Order/orderSummaryProps";
+import { useNavigate } from "react-router";
 
 const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [createOrder] = useCreateOrderMutation();
@@ -69,8 +71,17 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
             : SD_Status.PENDING,
       });
 
-      console.log(response);
+      if (response) {
+        if (response.data?.result.status === SD_Status.CONFIRMED) {
+          navigate(
+            `/order/orderConfirmed/${response.data.result.orderHeaderId}}`
+          );
+        } else {
+          navigate("/failed");
+        }
+      }
     }
+    setIsProcessing(false);
   };
   // "status": "string",
   return (
