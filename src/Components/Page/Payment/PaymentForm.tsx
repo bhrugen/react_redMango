@@ -41,7 +41,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       let grandTotal = 0;
       let totalItems = 0;
       const orderDetailsDTO: any = [];
-      data.cartItems.forEach((item: cartItemModel) => {
+      data.cartItems?.forEach((item: cartItemModel) => {
         const tempOrderDetail: any = {};
         tempOrderDetail["menuItemId"] = item.menuItem?.id;
         tempOrderDetail["quantity"] = item.quantity;
