@@ -23,6 +23,7 @@ const PaymentForm = () => {
       confirmParams: {
         return_url: "https://example.com/order/123/complete",
       },
+      redirect: "if_required",
     });
 
     if (result.error) {
