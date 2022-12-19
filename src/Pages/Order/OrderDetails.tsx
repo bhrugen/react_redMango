@@ -16,9 +16,9 @@ function OrderDetails() {
     };
     orderDetails = {
       id: data.result[0].orderHeaderId,
-      cartItems: data.result[0].cartItems,
-      cartTotal: data.result[0].cartTotal,
-      status: data.result[0].statu,
+      cartItems: data.result[0].orderDetails,
+      cartTotal: data.result[0].orderTotal,
+      status: data.result[0].status,
     };
   }
 
