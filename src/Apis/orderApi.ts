@@ -6,7 +6,7 @@ const orderApi = createApi({
     baseUrl: "https://redmangoapi.azurewebsites.net/api/",
   }),
   endpoints: (builder) => ({
-    initiatePayment: builder.mutation({
+    createOrder: builder.mutation({
       query: (orderDetails) => ({
         url: "order",
         method: "POST",
@@ -19,5 +19,5 @@ const orderApi = createApi({
   }),
 });
 
-export const { useInitiatePaymentMutation } = orderApi;
+export const { useCreateOrderMutation } = orderApi;
 export default orderApi;
