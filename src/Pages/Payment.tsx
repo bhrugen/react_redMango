@@ -16,7 +16,7 @@ function Payment() {
     // passing the client secret obtained from the server
     clientSecret: apiResult.clientSecret,
   };
-
+  console.log(apiResult);
   return (
     <Elements stripe={stripePromise} options={options}>
       <div className="container m-5 p-5">
@@ -24,8 +24,11 @@ function Payment() {
           <div className="col-md-7">
             <OrderSummary data={apiResult} userInput={userInput} />
           </div>
-          <div className="col-md-5">
-            <PaymentForm />
+          <div className="col-md-4 offset-md-1">
+            <h3 className="text-success">Payment</h3>
+            <div className="mt-5">
+              <PaymentForm />
+            </div>
           </div>
         </div>
       </div>
