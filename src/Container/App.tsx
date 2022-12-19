@@ -1,6 +1,13 @@
 import React from "react";
 import { Footer, Header } from "../Components/Layout";
-import { Home, MenuItemDetails, NotFound, ShoppingCart } from "../Pages";
+import {
+  Home,
+  Login,
+  MenuItemDetails,
+  NotFound,
+  Register,
+  ShoppingCart,
+} from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -32,6 +39,8 @@ function App() {
             element={<MenuItemDetails />}
           ></Route>
           <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
