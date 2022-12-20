@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { inputHelper } from "../../Helper";
+
+const menuItemData = {
+  name: "",
+  description: "",
+  specialTag: "",
+  category: "",
+  price: "",
+};
 
 function MenuItemUpsert() {
+  const [menuItemInputs, setMenuItemInputs] = useState(menuItemData);
+
+  const handleMenuItemInput = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const tempData = inputHelper(e, menuItemInputs);
+    setMenuItemInputs(tempData);
+  };
   return (
     <div className="container border mt-5 p-5">
       <h3 className="offset-2 px-2 text-success">Add Product</h3>
@@ -12,26 +31,42 @@ function MenuItemUpsert() {
               className="form-control"
               placeholder="Enter Name"
               required
+              name="name"
+              value={menuItemInputs.name}
+              onChange={handleMenuItemInput}
             />
             <textarea
               className="form-control mt-3"
               placeholder="Enter Description"
+              name="description"
+              rows={10}
+              value={menuItemInputs.description}
+              onChange={handleMenuItemInput}
             ></textarea>
             <input
               type="text"
               className="form-control mt-3"
               placeholder="Enter Special Tag"
+              name="specialTag"
+              value={menuItemInputs.specialTag}
+              onChange={handleMenuItemInput}
             />
             <input
               type="text"
               className="form-control mt-3"
               placeholder="Enter Category"
+              name="category"
+              value={menuItemInputs.category}
+              onChange={handleMenuItemInput}
             />
             <input
               type="number"
               className="form-control mt-3"
               required
               placeholder="Enter Price"
+              name="price"
+              value={menuItemInputs.price}
+              onChange={handleMenuItemInput}
             />
             <input type="file" className="form-control mt-3" />
             <div className="text-center">
