@@ -11,7 +11,9 @@ import Payment from "./Payment";
 import OrderConfirmed from "./Order/OrderConfirmed";
 import MyOrders from "./Order/MyOrders";
 import OrderDetails from "./Order/OrderDetails";
+import AllOrders from "./Order/AllOrders";
 export {
+  AllOrders,
   OrderDetails,
   MyOrders,
   OrderConfirmed,
