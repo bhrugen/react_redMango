@@ -8,6 +8,7 @@ import {
   Home,
   Login,
   MenuItemDetails,
+  MenuItemList,
   MyOrders,
   NotFound,
   OrderConfirmed,
@@ -76,6 +77,7 @@ function App() {
           <Route path="/order/myOrders" element={<MyOrders />} />
           <Route path="/order/orderDetails/:id" element={<OrderDetails />} />
           <Route path="/order/allOrders" element={<AllOrders />} />
+          <Route path="/menuItem/menuitemlist" element={<MenuItemList />} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
