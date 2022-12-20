@@ -1,12 +1,20 @@
 import React from "react";
+import { getStatusColor } from "../../../Helper";
 import { cartItemModel } from "../../../Interfaces";
 import { orderSummaryProps } from "./orderSummaryProps";
 
 function OrderSummary({ data, userInput }: orderSummaryProps) {
+  const badgeTypeColor = getStatusColor(data.status!);
+
   return (
     <div>
       {" "}
-      <h3 className="text-success">Order Summary</h3>
+      <div className="d-flex justify-content-between align-items-center">
+        <h3 className="text-success">Order Summary</h3>
+        <span className={`btn btn-outline-${badgeTypeColor} fs-6`}>
+          {data.status}
+        </span>
+      </div>
       <div className="mt-3">
         <div className="border py-3 px-2">Name : {userInput.name}</div>
         <div className="border py-3 px-2">Email : {userInput.email}</div>
