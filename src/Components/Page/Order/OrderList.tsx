@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { orderHeaderModel } from "../../../Interfaces";
 import { MainLoader } from "../Common";
 import OrderListProps from "./orderListType";
 import { useNavigate } from "react-router-dom";
-import { getStatusColor } from "../../../Helper";
+import { getStatusColor, inputHelper } from "../../../Helper";
 
-function OrderList({ isLoading, orderData }: OrderListProps) {
+function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
   const navigate = useNavigate();
+  const [filters, setFilters] = useState({ searchString: "" });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const tempValue = inputHelper(e, filters);
+    setFilters(tempValue);
+  };
+
   return (
     <>
       {isLoading && <MainLoader />}
       {!isLoading && (
         <div className="table p-5">
-          <h1 className="text-success">Orders List</h1>
+          <div className="d-flex align-items-center justify-content-between">
+            <h1 className="text-success">Orders List</h1>
+            <div className="d-flex" style={{ width: "40%" }}>
+              <input
+                type="text"
+                className="form-control mx-2"
+                placeholder="Search Name or mobile"
+                name="searchString"
+                value={filters.searchString}
+                onChange={handleChange}
+              />
+
+              <button
+                className="btn btn-outline-success w-25"
+                onClick={() => handleFilters && handleFilters(filters)}
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
           <div className="p-2">
             <div className="row border">
               <div className="col-1">ID</div>
