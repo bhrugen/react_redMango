@@ -15,7 +15,10 @@ function MyOrders() {
       {!isLoading && (
         <>
           <h1 className="text-success mx-5 mt-5">Orders List</h1>
-          <OrderList isLoading={isLoading} orderData={data.result} />
+          <OrderList
+            isLoading={isLoading}
+            orderData={data?.apiResponse.result}
+          />
         </>
       )}
     </>
