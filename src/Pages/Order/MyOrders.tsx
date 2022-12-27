@@ -9,7 +9,7 @@ import { SD_Status } from "../../Utility/SD";
 
 function MyOrders() {
   const userId = useSelector((state: RootState) => state.userAuthStore.id);
-  const { data, isLoading } = useGetAllOrdersQuery(userId);
+  const { data, isLoading } = useGetAllOrdersQuery({ userId });
   return (
     <>
       {isLoading && <MainLoader />}
