@@ -6,9 +6,12 @@ import { useGetAllOrdersQuery } from "../../Apis/orderApi";
 import OrderList from "../../Components/Page/Order/OrderList";
 import { MainLoader } from "../../Components/Page/Common";
 import { orderHeaderModel } from "../../Interfaces";
+
 interface filterType {
   searchString: string;
+  status: string;
 }
+
 function AllOrders() {
   const [orderData, setOrderData] = useState<Array<orderHeaderModel>>([]);
   const [filters, setFilters] = useState<any>(null);
@@ -36,11 +39,17 @@ function AllOrders() {
       )
         return orderData;
     });
-    setOrderData(tempData);
+
+    // sort
+
+    const finalArray = tempData.filter((orderData: orderHeaderModel) =>
+      filters.status !== "" ? orderData.status === filters.status : orderData
+    );
+    setOrderData(finalArray);
   };
 
-  const handleFilters = ({ searchString }: filterType) => {
-    setFilters({ searchString });
+  const handleFilters = ({ searchString, status }: filterType) => {
+    setFilters({ searchString, status });
   };
 
   return (

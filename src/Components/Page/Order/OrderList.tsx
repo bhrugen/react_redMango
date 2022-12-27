@@ -4,10 +4,11 @@ import { MainLoader } from "../Common";
 import OrderListProps from "./orderListType";
 import { useNavigate } from "react-router-dom";
 import { getStatusColor, inputHelper } from "../../../Helper";
+import { SD_Status } from "../../../Utility/SD";
 
 function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState({ searchString: "" });
+  const [filters, setFilters] = useState({ searchString: "", status: "" });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -16,6 +17,13 @@ function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
     setFilters(tempValue);
   };
 
+  const filterOptions = [
+    "All",
+    SD_Status.CONFIRMED,
+    SD_Status.BEING_COOKED,
+    SD_Status.READY_FOR_PICKUP,
+  ];
+
   return (
     <>
       {isLoading && <MainLoader />}
@@ -23,7 +31,7 @@ function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
         <div className="table p-5">
           <div className="d-flex align-items-center justify-content-between">
             <h1 className="text-success">Orders List</h1>
-            <div className="d-flex" style={{ width: "40%" }}>
+            <div className="d-flex align-items-center" style={{ width: "50%" }}>
               <input
                 type="text"
                 className="form-control mx-2"
@@ -32,6 +40,17 @@ function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
                 value={filters.searchString}
                 onChange={handleChange}
               />
+
+              <select
+                className="form-select w-50 mx-2"
+                name="status"
+                value={filters.status}
+                onChange={handleChange}
+              >
+                {filterOptions.map((item) => (
+                  <option value={item === "All" ? "" : item}>{item}</option>
+                ))}
+              </select>
 
               <button
                 className="btn btn-outline-success w-25"
