@@ -13,7 +13,10 @@ function MyOrders() {
     <>
       {isLoading && <MainLoader />}
       {!isLoading && (
-        <OrderList isLoading={isLoading} orderData={data.result} />
+        <>
+          <h1 className="text-success mx-5 mt-5">Orders List</h1>
+          <OrderList isLoading={isLoading} orderData={data.result} />
+        </>
       )}
     </>
   );
