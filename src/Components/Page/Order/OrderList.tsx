@@ -53,7 +53,7 @@ function OrderList({ isLoading, orderData, handleFilters }: OrderListProps) {
               </select>
 
               <button
-                className="btn btn-outline-success w-25"
+                className="btn btn-outline-success w-50"
                 onClick={() => handleFilters && handleFilters(filters)}
               >
                 Apply Filters

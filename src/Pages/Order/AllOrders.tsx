@@ -15,7 +15,12 @@ interface filterType {
 function AllOrders() {
   const [orderData, setOrderData] = useState<Array<orderHeaderModel>>([]);
   const [filters, setFilters] = useState<any>(null);
-  const { data, isLoading } = useGetAllOrdersQuery("");
+  const { data, isLoading, refetch } = useGetAllOrdersQuery({
+    ...(filters && {
+      searchString: filters.searchString,
+      status: filters.status,
+    }),
+  });
 
   useEffect(() => {
     if (data) {
@@ -29,23 +34,10 @@ function AllOrders() {
   }, [filters]);
 
   const get_filters = async (filters: filterType) => {
-    // search
-    const tempData = data.result.filter((orderData: orderHeaderModel) => {
-      if (
-        (orderData.pickupName &&
-          orderData.pickupName.includes(filters.searchString)) ||
-        (orderData.pickupPhoneNumber &&
-          orderData.pickupPhoneNumber.includes(filters.searchString))
-      )
-        return orderData;
-    });
-
-    // sort
-
-    const finalArray = tempData.filter((orderData: orderHeaderModel) =>
-      filters.status !== "" ? orderData.status === filters.status : orderData
-    );
-    setOrderData(finalArray);
+    if (filters) {
+      const { data } = await refetch();
+      setOrderData(data.result);
+    }
   };
 
   const handleFilters = ({ searchString, status }: filterType) => {
