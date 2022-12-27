@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { withAdminAuth, withAuth } from "../../HOC";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Storage/Redux/store";
+import { withAdminAuth } from "../../HOC";
 import { useGetAllOrdersQuery } from "../../Apis/orderApi";
 import OrderList from "../../Components/Page/Order/OrderList";
 import { MainLoader } from "../../Components/Page/Common";
 import { inputHelper } from "../../Helper";
 import { SD_Status } from "../../Utility/SD";
-import { orderHeaderModel } from "../../Interfaces";
 
 function AllOrders() {
-  const { data, isLoading } = useGetAllOrdersQuery("");
   const [orderData, setOrderData] = useState([]);
   const [filters, setFilters] = useState({ searchString: "", status: "" });
+  const [loading, setLoading] = useState(false);
+  const [apiFilters, setApiFilters] = useState({
+    searchString: "",
+    status: "",
+  });
+  const { data, isLoading } = useGetAllOrdersQuery({
+    ...(apiFilters && {
+      searchString: apiFilters.searchString,
+      status: apiFilters.status,
+    }),
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -22,28 +29,17 @@ function AllOrders() {
   };
 
   const handleFilters = () => {
-    // search
-    const tempData = data.result.filter((orderData: orderHeaderModel) => {
-      if (
-        (orderData.pickupName &&
-          orderData.pickupName.includes(filters.searchString)) ||
-        (orderData.pickupPhoneNumber &&
-          orderData.pickupPhoneNumber.includes(filters.searchString))
-      )
-        return orderData;
+    setApiFilters({
+      searchString: filters.searchString,
+      status: filters.status,
     });
-
-    // sort
-
-    const finalArray = tempData.filter((orderData: orderHeaderModel) =>
-      filters.status !== "" ? orderData.status === filters.status : orderData
-    );
-    setOrderData(finalArray);
+    setLoading(true);
   };
 
   useEffect(() => {
     if (data) {
       setOrderData(data.result);
+      setLoading(false);
     }
   }, [data]);
 
@@ -58,6 +54,7 @@ function AllOrders() {
       {isLoading && <MainLoader />}
       {!isLoading && (
         <>
+          {loading && <MainLoader />}
           <div className="d-flex align-items-center justify-content-between mx-5 mt-5">
             <h1 className="text-success">Orders List</h1>
             <div className="d-flex" style={{ width: "40%" }}>
