@@ -134,6 +134,9 @@ function MenuItemUpsert() {
       <h3 className=" px-2 text-success">
         {id ? "Edit Menu Item" : "Add Menu Item"}
       </h3>
+      <div className="bg-danger form-control text-center text-white h4">
+        In demo, you will not be able to create/update or delete Menu Items!
+      </div>
       <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
         <div className="row mt-3">
           <div className="col-md-7">
