@@ -18,8 +18,12 @@ function CartSummary() {
     (state: RootState) => state.userAuthStore
   );
 
-  if (!shoppingCartFromStore) {
-    return <div>Shopping Cart Empty</div>;
+  if (shoppingCartFromStore.length == 0) {
+    return (
+      <div className="p-5">
+        There are no items in your cart. Please add items to continue.
+      </div>
+    );
   }
 
   const handleQuantity = (

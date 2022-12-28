@@ -106,7 +106,7 @@ export default function CartPickUpDetails() {
         <button
           type="submit"
           className="btn btn-lg btn-success form-control mt-3"
-          disabled={loading}
+          disabled={loading || shoppingCartFromStore.length == 0}
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
         </button>
