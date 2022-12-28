@@ -18,6 +18,11 @@ function MyOrders() {
           <div className="d-flex align-items-center justify-content-between mx-5 mt-5">
             <h1 className="text-success">My Orders</h1>
           </div>
+          <div className="mx-5">
+            <div className="bg-danger form-control text-center text-white h4 ">
+              In this demo, orders older than 3 days might be deleted!
+            </div>
+          </div>
           {data?.apiResponse.result.length > 0 && (
             <OrderList
               isLoading={isLoading}

@@ -93,6 +93,7 @@ function AllOrders() {
         <>
           <div className="d-flex align-items-center justify-content-between mx-5 mt-5">
             <h1 className="text-success">Orders List</h1>
+
             <div className="d-flex" style={{ width: "40%" }}>
               <input
                 type="text"
@@ -120,7 +121,11 @@ function AllOrders() {
               </button>
             </div>
           </div>
-
+          <div className="mx-5">
+            <div className="bg-danger form-control text-center text-white h4 ">
+              In this demo, orders older than 3 days might be deleted!
+            </div>
+          </div>
           <OrderList isLoading={isLoading} orderData={orderData} />
           <div className="d-flex mx-5 justify-content-end align-items-center">
             <div>Rows per page: </div>
